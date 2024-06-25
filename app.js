@@ -47,7 +47,28 @@ app.post("/createBlog", async (req,res) => {
         description
     })
     res.status(200).json({
-        message : "yoou are in create blog page"
+        message : "Blog created successfully"
+    })
+})
+
+app.patch("/blogs/:id",async(req,res) => {
+    const id = req.params.id
+    const {title,subTitle,description} = req.body;
+    await Blog.findByIdAndUpdate(id,{
+        title,
+        subTitle,
+        description
+    })
+    res.status(200).json({
+        message : "Blog updated successfully"
+    })
+})
+
+app.delete("/blogs/:id",async (req,res) => {
+    const id = req.params.id;
+    await Blog.findByIdAndDelete(id);
+    res.status(200).json({
+        message : "Blog deleted successfully"
     })
 })
 
